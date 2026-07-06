@@ -45,8 +45,8 @@ class DataTransformation:
             )
             preprocessor = ColumnTransformer(
                 transformers=[
-                    ('num_pipeline', StandardScaler(), num_pipeline),
-                    ('cat_pipeline', OneHotEncoder(drop='first'), cat_pipeline)
+                    ('num_pipeline', num_pipeline, numerical_columns),
+                    ('cat_pipeline', cat_pipeline, categorical_columns)
                 ]
             )
             return preprocessor
@@ -104,5 +104,15 @@ class DataTransformation:
             raise CustomException(e,sys)
 
 if __name__=="__main__":
-    obj=DataTransformation()
-    obj.get_data_transformer_object()
+    from src.components.data_ingestion import DataIngestion
+
+    ingestion = DataIngestion()
+    train_path, test_path = ingestion.initiate_data_ingestion()
+
+    data_transformation = DataTransformation()
+    train_arr, test_arr, preprocessor_path = data_transformation.initiate_data_transformation(
+        train_path=train_path,
+        test_path=test_path
+    )
+
+    print(f"Preprocessor saved to: {preprocessor_path}")

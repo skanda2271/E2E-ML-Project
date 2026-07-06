@@ -34,4 +34,4 @@ setup.py --> A setup.py file is the build script for Python packages. It defines
 - reading score
 - writing score
 
-
+![alt text](image.png)
