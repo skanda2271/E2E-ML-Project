@@ -87,3 +87,33 @@ Use a virtual environment or `requirements.txt`, pin dependencies, and avoid har
 
 ### 10. What is the benefit of saving the preprocessor separately from the model?
 Saving the preprocessor separately ensures the same preprocessing logic is applied during inference. It also enables reuse of the transformation pipeline even if the model changes.
+
+
+
+Step 1
+FROM python:3.9-slim-buster
+        ↓
+Downloads Python image (if not already available)
+
+Step 2
+WORKDIR /app
+        ↓
+Creates /app
+
+Step 3
+COPY . /app
+        ↓
+Copies project files
+
+Step 4
+RUN apt update
+RUN apt install awscli
+        ↓
+Installs AWS CLI
+
+Step 5
+RUN pip install
+        ↓
+Installs Python packages
+
+Image Created ✔
